@@ -15,4 +15,24 @@ public class Hit {
         this.domainId = domainId;
         this.context = context;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public long getWordId() {
+        return wordId;
+    }
+
+    public long getDomainId() {
+        return domainId;
+    }
+
+    public String getContext() {
+        return context;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
 }

@@ -35,7 +35,7 @@ public class WordScraper {
 
     public WordScraper connectToUrl() {
         try {
-            this.doc = Jsoup.connect(url).get();
+            this.doc = Jsoup.connect(this.url).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,28 +69,28 @@ public class WordScraper {
      * @param cssSelector
      * @return A list of hits on the page
      */
-    public List<Hit> searchForAppearance(Search string, String cssSelector) {
+    List<Hit> searchForAppearance(Search string, String cssSelector) {
         return listAllAppearancesOfSearchString(splitDocumentIntoChunks(cssSelector),string);
     }
 
-    public List<Hit> searchForAppearance(Search string) {
+     List<Hit> searchForAppearance(Search string) {
         return listAllAppearancesOfSearchString(removeDuplciates(
                 splitDocumentIntoChunks(this.selector)
         ), string);
     }
 
-    public List<String> splitDocumentIntoChunks(String cssSelector) {
+    private List<String> splitDocumentIntoChunks(String cssSelector) {
         var lines = new ArrayList<String>();
         doc.select(cssSelector).forEach(x ->  lines.add(x.text()));
         return lines;
     }
 
-    public List<String> removeDuplciates(List<String> strings) {
+    private List<String> removeDuplciates(List<String> strings) {
         var map = new HashSet<>(strings);
         return new ArrayList<>(map);
     }
 
-    public List<String> splitDocumentIntoChunks() {
+    private List<String> splitDocumentIntoChunks() {
         if (this.domain == null) {
             throw new IllegalStateException("Scraper.domain can not be null when using method without specified selector");
         }
@@ -106,13 +106,13 @@ public class WordScraper {
      * @param cssSelector
      * @return ArrayList List of bits of text extracted from the document
      */
-    public List<String> splitDocumentIntoChildrenBySelector(String cssSelector) {
+    private List<String> splitDocumentIntoChildrenBySelector(String cssSelector) {
         var lines = new ArrayList<String>();
         doc.select(cssSelector).forEach(x -> x.children().forEach(y -> lines.add(y.text())));
         return lines;
     }
 
-    public List<Hit> listAllAppearancesOfSearchString(List<String> strings, Search string) {
+    private List<Hit> listAllAppearancesOfSearchString(List<String> strings, Search string) {
         var appearances = new ArrayList<Hit>();
         strings.stream()
                 .filter(x -> x.contains(string.getWord()))
