@@ -22,21 +22,43 @@ public class WordScraper {
     private Domain domain;
     private String selector;
 
-
-    public WordScraper(Domain domain, String selector) {
+    /**
+     * The WordScraper uses a domain and extracts the URL.
+     * It has functionality to search for a search-term (Search)
+     * The selector is the top level, all text contained within the selector is parsed.
+     * Text which lies outside that which the selector matches is not parsed.
+     * @param domain The start domain
+     * @param selector A css selector
+     */
+    WordScraper(Domain domain, String selector) {
         this.url = domain.getURL();
         this.domain = domain;
         this.selector = selector;
         connectToUrl();
     }
 
-    public WordScraper switchDomain(Domain newDomain) {
+    /**
+     * Switches domain and connects to its' url
+     * @param newDomain the new domain
+     * @return this
+     */
+    WordScraper switchDomainAndConnect(Domain newDomain)  {
+        switchDomain(newDomain);
+        connectToUrl();
+        return this;
+    }
+
+    private WordScraper switchDomain(Domain newDomain) {
         this.url = newDomain.getURL();
         this.domain = newDomain;
         return this;
     }
 
-    public WordScraper connectToUrl() {
+    /**
+     * Connects to current url and fetches the document.
+     * @return
+     */
+     WordScraper connectToUrl() {
         try {
             this.doc = Jsoup.connect(this.url).get();
         } catch (IOException e) {
@@ -54,64 +76,80 @@ public class WordScraper {
         return this;
     }
 
-
-    public List<Hit> searchWithMatcher(Search string) {
+    /**
+     * The public method for searching the current web-page.
+     * Uses a regex pattern matcher.
+     * @param string  The string to search for.
+     * @return A list of all hits with specified string
+     */
+    List<Hit> searchWithMatcher(Search string) {
         return listAllHitsUsingMatcher(string);
     }
 
-
-    private List<String> splitDocumentIntoChunks(String cssSelector) {
+    /**
+     * Method to split a document into text by selector specified in constructor
+     * Method is not currently in use.
+     * @return List of text-chunks
+     */
+    @Deprecated
+    private List<String> splitDocumentIntoChunks() {
         var lines = new ArrayList<String>();
-        doc.select(cssSelector).forEach(x ->  lines.add(x.text()));
+        doc.select(selector).forEach(x -> lines.add(x.text()));
         return lines;
     }
 
+    /**
+     * Method to remove duplicated in a list of string
+     * Method is not currently in use.
+     * @param strings list of strings
+     * @return list of strings without duplicates
+     */
     private List<String> removeDuplciates(List<String> strings) {
         var map = new HashSet<>(strings);
         return new ArrayList<>(map);
     }
 
-    private List<String> splitDocumentIntoChunks() {
-        if (this.domain == null) {
-            throw new IllegalStateException("Scraper.domain can not be null when using method without specified selector");
-        }
-        var lines = new ArrayList<String>();
-        doc.select(selector).forEach(x ->  lines.add(x.text()));
-        return lines;
-    }
 
-
+    /**
+     * Lists all the hits on a page, using a regex pattern matcher.
+     * Creates the context by using the matcher start and end points, making sure not to fall out of bounds
+     *
+     * @param string
+     * @return
+     */
     private List<Hit> listAllHitsUsingMatcher(Search string) {
         var hits = new ArrayList<Hit>();
         Pattern pattern = Pattern.compile(string.getWord().toLowerCase());
-        String documentText =getDocumentText().toLowerCase();
+        String documentText = getDocumentText().toLowerCase();
         Matcher matcher = pattern.matcher(documentText);
         while (matcher.find()) {
             hits.add(new Hit(string.getId(),
                     this.domain.getId(),
                     documentText.substring(
-                            Math.max((matcher.start() - CONTEXT_LENGTH),0), //So as to not fall out of string bounds
-                            Math.min((matcher.end() + CONTEXT_LENGTH),documentText.length()-1))
+                            Math.max((matcher.start() - CONTEXT_LENGTH), 0), //So as to not fall out of string bounds
+                            Math.min((matcher.end() + CONTEXT_LENGTH), documentText.length() - 1)
+                    )
             ));
         }
         return hits;
     }
 
+    /**Returns the plain text of a document as a String
+     * uses the selector specified
+     *
+     * @return the plain text in a document
+     */
     private String getDocumentText() {
         return this.doc.select(this.selector).text();
     }
 
-    private List<Hit> listAllHitsOnSearch(List<String> strings, Search string) {
-        var appearances = new ArrayList<Hit>();
-        strings.stream()
-                .filter(x -> x.contains(string.getWord()))
-                .forEach(x -> appearances.add(new Hit(string.getId(), this.domain.getId(), x)));
-        return appearances;
-    }
-
+    /**
+     * Returns all the links at a url
+     * @return the urls
+     */
     public List<String> returnAllLinksInDomain() {
         var links = new ArrayList<String>();
-        doc.select("a").stream().map(x-> x.attr("href")).forEach(links::add);
+        doc.select("a").stream().map(x -> x.attr("href")).forEach(links::add);
         return links;
     }
 }
