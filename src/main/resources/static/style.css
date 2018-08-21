@@ -25,6 +25,8 @@ input[type=search]{
     padding: 12px 20px;
     margin: 8px 0;
     border-radius: 2.5px;
+    font-family: "Alegreya Sans";
+    font-size: 16px;
 }
 
 #navbar{
@@ -44,6 +46,7 @@ input[type=search]{
     text-decoration: none;
     text-align: center;
     padding: 20px;
+    transition: all 0.3s ease;
 }
 
 #navbar a:visited{
@@ -57,6 +60,7 @@ input[type=search]{
 #button{
     padding: 12px;
     border-radius: 2.5px;
+    font-family: "Alegreya Sans";
 }
 
 #button:hover{
