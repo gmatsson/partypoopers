@@ -3,9 +3,9 @@ package se.val18.miniprojekt.repo;
 public class Domain {
     String URL;
     String name;
-    long id;
+    int id;
 
-    public Domain(String URL, String name, long id) {
+    public Domain(String URL, String name, int id) {
         this.URL = URL;
         this.name = name;
         this.id = id;
@@ -19,7 +19,16 @@ public class Domain {
         return name;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Domain{" +
+                "URL='" + URL + '\'' +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
