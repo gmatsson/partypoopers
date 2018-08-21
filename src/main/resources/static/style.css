@@ -1,0 +1,35 @@
+body{
+    background-color: white;
+}
+
+.headline{
+    font-family: 'Alegreya Sans';
+    font-size: 22px;
+}
+
+.flex-container-headline{
+    display: flex;
+    justify-content: left;
+    width: 100%;
+}
+
+.flex-container-search{
+    display: flex;
+    justify-content: left;
+    width: 100%;
+}
+
+#navbar a{
+    color: black;
+    font-family: 'Alegreya Sans';
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#navbar a:visited{
+    color: black;
+}
+
+#navbar a:hover{
+    color: gray;
+}
