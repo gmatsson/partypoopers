@@ -14,6 +14,7 @@ public class projectController {
         return new ModelAndView("index");
     }
 
+
     @PostMapping("/")
     public ModelAndView index(@RequestParam String text){
 

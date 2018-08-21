@@ -7,23 +7,43 @@ body{
     font-size: 22px;
 }
 
-.flex-container-headline{
+.headline-container{
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    width: 100%;
+    margin-top: 200px;
+}
+
+.search-container{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
     width: 100%;
 }
 
-.flex-container-search{
-    display: flex;
-    justify-content: left;
+input[type=search]{
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 2.5px;
+}
+
+#navbar{
+    overflow: hidden;
+    background-color: transparent;
+    padding: auto;
+    position: fixed;
+    margin-top: 10px;
+    top: 0;
     width: 100%;
 }
 
 #navbar a{
     color: black;
     font-family: 'Alegreya Sans';
-    font-size: 14px;
+    font-size: 20px;
     text-decoration: none;
+    text-align: center;
+    padding: 20px;
 }
 
 #navbar a:visited{
@@ -32,4 +52,14 @@ body{
 
 #navbar a:hover{
     color: gray;
+}
+
+#button{
+    padding: 12px;
+    border-radius: 2.5px;
+}
+
+#button:hover{
+    background-color: gray;
+    cursor: pointer;
 }
