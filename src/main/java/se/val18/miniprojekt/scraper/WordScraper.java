@@ -12,8 +12,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WordScraper {
+    private static final int CONTEXT_LENGTH = 50;
     private String url;
     private Document doc;
     private Domain domain;
@@ -51,33 +54,11 @@ public class WordScraper {
         return this;
     }
 
-    public Elements allElementsBySelector(String selector) {
-        return doc.select(selector);
+
+    public List<Hit> searchWithMatcher(Search string) {
+        return listAllHitsUsingMatcher(string);
     }
 
-    /**
-     * searches for occurences of the name of the given politician
-     * returns a list of appearances
-     *
-     *
-     * @return
-     */
-
-    /**
-     * Searches the current document for hits on search-string with specified selector
-     * @param string
-     * @param cssSelector
-     * @return A list of hits on the page
-     */
-    List<Hit> searchForAppearance(Search string, String cssSelector) {
-        return listAllAppearancesOfSearchString(splitDocumentIntoChunks(cssSelector),string);
-    }
-
-     List<Hit> searchForAppearance(Search string) {
-        return listAllAppearancesOfSearchString(removeDuplciates(
-                splitDocumentIntoChunks(this.selector)
-        ), string);
-    }
 
     private List<String> splitDocumentIntoChunks(String cssSelector) {
         var lines = new ArrayList<String>();
@@ -99,20 +80,28 @@ public class WordScraper {
         return lines;
     }
 
-    /**
-     * takes a css selector and splits the current document into chunks where each
-     * chunk is a string containing the text content of each child of every element that matches the css selector
-     *
-     * @param cssSelector
-     * @return ArrayList List of bits of text extracted from the document
-     */
-    private List<String> splitDocumentIntoChildrenBySelector(String cssSelector) {
-        var lines = new ArrayList<String>();
-        doc.select(cssSelector).forEach(x -> x.children().forEach(y -> lines.add(y.text())));
-        return lines;
+
+    private List<Hit> listAllHitsUsingMatcher(Search string) {
+        var hits = new ArrayList<Hit>();
+        Pattern pattern = Pattern.compile(string.getWord().toLowerCase());
+        String documentText =getDocumentText().toLowerCase();
+        Matcher matcher = pattern.matcher(documentText);
+        while (matcher.find()) {
+            hits.add(new Hit(string.getId(),
+                    this.domain.getId(),
+                    documentText.substring(
+                            Math.max((matcher.start() - CONTEXT_LENGTH),0), //So as to not fall out of string bounds
+                            Math.min((matcher.end() + CONTEXT_LENGTH),documentText.length()-1))
+            ));
+        }
+        return hits;
     }
 
-    private List<Hit> listAllAppearancesOfSearchString(List<String> strings, Search string) {
+    private String getDocumentText() {
+        return this.doc.select(this.selector).text();
+    }
+
+    private List<Hit> listAllHitsOnSearch(List<String> strings, Search string) {
         var appearances = new ArrayList<Hit>();
         strings.stream()
                 .filter(x -> x.contains(string.getWord()))
