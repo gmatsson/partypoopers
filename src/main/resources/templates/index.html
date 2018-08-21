@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>PartyPoopers</title>
@@ -36,8 +36,8 @@
         <th>Antal</th>
     </tr>
     <tr>
-        <td>Jennie</td>
-        <td>Ahlberg</td>
+        <td th:each="party : ${parties}">Partier</td>
+        <td th:each="result : ${results}">Antal förekomster av ord</td>
     </tr>
 </table>
 </div>
