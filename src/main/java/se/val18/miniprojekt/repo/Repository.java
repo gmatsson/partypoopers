@@ -114,16 +114,38 @@ public class Repository {
             Statement stmt = conn.createStatement();
 
             String query =
-                    "SELECT id, name, url from dbo.domain";
+                    "SELECT id, name, url, path from dbo.domain";
             var ps = conn.prepareStatement(query);
             var rs = ps.executeQuery();
             while (rs.next()) {
                 domains.add(new Domain(rs.getString("url"),
                         rs.getString("name"),
+                        rs.getString("path"),
                         rs.getInt("id"))
                 );
             }
             return domains;
+        } catch (SQLException e) {
+            System.err.println("Something went wrong when fetching domains!");
+            return null;
+        }
+    }
+    public List<Search> getAllSearch() {
+        var searches = new ArrayList<Search>();
+        try {
+            Connection conn = dataSource.getConnection();
+            Statement stmt = conn.createStatement();
+
+            String query =
+                    "SELECT id, word from dbo.search";
+            var ps = conn.prepareStatement(query);
+            var rs = ps.executeQuery();
+            while (rs.next()) {
+                searches.add(new Search(rs.getInt("id"),
+                        rs.getString("word")
+                ));
+            }
+            return searches;
         } catch (SQLException e) {
             System.err.println("Something went wrong when fetching domains!");
             return null;

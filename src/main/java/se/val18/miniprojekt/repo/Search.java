@@ -16,4 +16,12 @@ public class Search {
     public String getWord() {
         return word;
     }
+
+    @Override
+    public String toString() {
+        return "Search{" +
+                "id=" + id +
+                ", word='" + word + '\'' +
+                '}';
+    }
 }

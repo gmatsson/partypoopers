@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import se.val18.miniprojekt.repo.Domain;
 import se.val18.miniprojekt.repo.Hit;
 import se.val18.miniprojekt.repo.Repository;
+import se.val18.miniprojekt.repo.Search;
+import se.val18.miniprojekt.scraper.WordScraper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,21 +25,16 @@ public class MiniprojektApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        //        Domain dom = new Domain(1, "Mathias", "www.mathiasnaked.com");
-        //        List<Domain> list = new ArrayList<>();
-        //        list.add(dom);
-        //        try {
-        //            repo.addDomainToDb(list);
-        //        } catch (
-        //                SQLException e) {
-        //            e.printStackTrace();
-        //        }
 
+        Domain dom = repo.getAllDomains().get(0);
+        Search search = repo.getAllSearch().get(0);
 
-        repo.getAllDomains().forEach(System.out::println);
-
-        repo.getCountAndNameForId(repo.getWordIdForString("Trygghet"))
-                .forEach(x-> System.out.println(x.getName() + " " + x.getCount()));
+        love_gustaf/writeDB
+        var scr = new WordScraper(dom, "body");
+        String path = scr.returnAllLinksInDomain().get(30);
+        scr.switchPathAndConnect(path);
+        System.out.println(scr.getUrl());
+        scr.returnAllLinksInDomain().forEach(System.out::println);
 
     }
 }
