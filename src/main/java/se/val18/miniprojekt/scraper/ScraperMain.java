@@ -11,17 +11,17 @@ import java.util.List;
 public class ScraperMain {
     public static void main(String[] args) {
 //        var scrape = new WordScraper(new Domain("https://dn.se", "DN", 123), "body");
+//
 //        List<Hit> hits = new ArrayList<>();
-//        List<Search> searches = repo.getAllSearches();
-//        List<Domain> domains = repo.getAllDomains();
+//
 //        for (var d : domains) {
 //            scrape.switchDomainAndConnect(d);
 //            for (var s : searches) {
 //                hits.addAll(scrape.searchWithMatcher(s));
 //            }
 //        }
-//        repo.createHits(hits);
 //
+
 
     }
 }

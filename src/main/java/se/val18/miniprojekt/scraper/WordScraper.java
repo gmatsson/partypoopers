@@ -22,6 +22,15 @@ public class WordScraper {
     private Domain domain;
     private String selector;
 
+
+    public String getUrl() {
+        return url;
+    }
+
+    public Domain getDomain() {
+        return domain;
+    }
+
     /**
      * The WordScraper uses a domain and extracts the URL.
      * It has functionality to search for a search-term (Search)
@@ -30,7 +39,7 @@ public class WordScraper {
      * @param domain The start domain
      * @param selector A css selector
      */
-    WordScraper(Domain domain, String selector) {
+    public WordScraper(Domain domain, String selector) {
         this.url = domain.getURL();
         this.domain = domain;
         this.selector = selector;
@@ -42,7 +51,7 @@ public class WordScraper {
      * @param newDomain the new domain
      * @return this
      */
-    WordScraper switchDomainAndConnect(Domain newDomain)  {
+    public WordScraper switchDomainAndConnect(Domain newDomain)  {
         switchDomain(newDomain);
         connectToUrl();
         return this;
@@ -58,7 +67,7 @@ public class WordScraper {
      * Connects to current url and fetches the document.
      * @return
      */
-     WordScraper connectToUrl() {
+     private WordScraper connectToUrl() {
         try {
             this.doc = Jsoup.connect(this.url).get();
         } catch (IOException e) {
@@ -82,7 +91,7 @@ public class WordScraper {
      * @param string  The string to search for.
      * @return A list of all hits with specified string
      */
-    List<Hit> searchWithMatcher(Search string) {
+    public List<Hit> searchWithMatcher(Search string) {
         return listAllHitsUsingMatcher(string);
     }
 

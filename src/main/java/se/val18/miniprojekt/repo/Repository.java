@@ -125,5 +125,26 @@ public class Repository {
             return null;
         }
     }
+    public List<Search> getAllSearch() {
+        var searches = new ArrayList<Search>();
+        try {
+            Connection conn = dataSource.getConnection();
+            Statement stmt = conn.createStatement();
+
+            String query =
+                    "SELECT id, word from dbo.search";
+            var ps = conn.prepareStatement(query);
+            var rs = ps.executeQuery();
+            while (rs.next()) {
+                searches.add(new Search(rs.getInt("id"),
+                        rs.getString("word")
+                ));
+            }
+            return searches;
+        } catch (SQLException e) {
+            System.err.println("Something went wrong when fetching domains!");
+            return null;
+        }
+    }
 }
 
