@@ -18,7 +18,6 @@ public class MiniprojektApplication implements CommandLineRunner {
     Repository repo;
     public static void main(String[] args) {
         SpringApplication.run(MiniprojektApplication.class, args);
-
     }
 
     @Override
@@ -39,6 +38,6 @@ public class MiniprojektApplication implements CommandLineRunner {
         repo.getCountAndNameForId(repo.getWordIdForString("Trygghet"))
                 .forEach(x-> System.out.println(x.getName() + " " + x.getCount()));
 
-
     }
 }
+
