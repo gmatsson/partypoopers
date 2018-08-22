@@ -20,6 +20,10 @@ public class Domain {
         this.id = id;
     }
 
+    public String getPath() {
+        return path;
+    }
+
     public String getURL() {
         return URL;
     }

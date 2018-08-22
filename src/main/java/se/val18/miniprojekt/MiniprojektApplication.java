@@ -37,5 +37,6 @@ public class MiniprojektApplication implements CommandLineRunner {
                 scr.getDomain().getName(),
                 scr.getDomain().getId()));
         scr.returnAllLinksInDomain().forEach(System.out::println);
+
     }
 }

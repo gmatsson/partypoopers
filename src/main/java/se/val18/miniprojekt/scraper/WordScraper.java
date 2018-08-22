@@ -40,7 +40,7 @@ public class WordScraper {
      * @param selector A css selector
      */
     public WordScraper(Domain domain, String selector) {
-        this.url = domain.getURL();
+        this.url = domain.getURL() + domain.getPath();
         this.domain = domain;
         this.selector = selector;
         connectToUrl();
@@ -57,9 +57,20 @@ public class WordScraper {
         return this;
     }
 
+    public WordScraper switchPathAndConnect(String newPath) {
+        switchPath(newPath);
+        connectToUrl();
+        return this;
+    }
+
     private WordScraper switchDomain(Domain newDomain) {
-        this.url = newDomain.getURL();
+        this.url = newDomain.getURL() + newDomain.getPath();
         this.domain = newDomain;
+        return this;
+    }
+
+    private WordScraper switchPath(String newPath) {
+        this.url = this.domain.getURL() + newPath;
         return this;
     }
 

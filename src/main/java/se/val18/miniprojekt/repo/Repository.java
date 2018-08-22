@@ -110,12 +110,13 @@ public class Repository {
             Statement stmt = conn.createStatement();
 
             String query =
-                    "SELECT id, name, url from dbo.domain";
+                    "SELECT id, name, url, path from dbo.domain";
             var ps = conn.prepareStatement(query);
             var rs = ps.executeQuery();
             while (rs.next()) {
                 domains.add(new Domain(rs.getString("url"),
                         rs.getString("name"),
+                        rs.getString("path"),
                         rs.getInt("id"))
                 );
             }
