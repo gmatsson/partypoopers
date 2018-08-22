@@ -178,19 +178,21 @@ input[type=submit] {
     min-width: 160px;
     z-index: 1;
     border-radius: 4px;
+    margin-bottom: 100px;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
     color: black;
-    padding: 10px 123px;
+    padding: 10px 100px;
     text-decoration: none;
     display: block;
 }
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-    background-color: #ddd;}
+    background-color: #ddd;
+}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -198,4 +200,6 @@ input[type=submit] {
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #e2d269;}
+.dropdown:hover .dropbtn {
+    background-color: #e2d269;
+}

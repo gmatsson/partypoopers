@@ -140,7 +140,7 @@ public class Repository {
             }
             return searches;
         } catch (SQLException e) {
-            System.err.println("Something went wrong when fetching domains!");
+            System.err.println("Something went wrong when fetching search!");
             return null;
         }
     }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>PartyPoopers</title>
     <link href='https://fonts.googleapis.com/css?family=Alegreya Sans' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 
@@ -22,28 +22,27 @@
 </div>
 </div>
 
+<div th:each="party : ${parties}">
+    <header>
+        <p>
+            <span th:text="${party.name}" />
+            <span th:text="${party.count}" />
+        </p>
+    </header>
+</div>
 
-<div class="search-container" th:each="word:${words}">
+
+<div class="search-container" >
 <div class="dropdown">
     <button class="dropbtn">Välj ett ord!</button>
     <div class="dropdown-content">
-        <form action="/search" method="post">
-        <a href="/search">Search</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-    </form>
+        <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}">Link 2</a>
+
     </div>
 </div>
 </div>
 
-<div th:each="word : ${words}">
-    <header>
-        <p>
-            <span th:text="${word.name}" />
-            <span th:text="${word.count}" />
-        </p>
-    </header>
-</div>
+
 
 <!--<p th:text="${countName.name}"></p>-->
 
