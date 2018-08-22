@@ -24,9 +24,6 @@ public class Repository {
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
-            for (Domain d : domain) {
-                int rs = stmt.executeUpdate("UPDATE Domain SET Name = \'" + d.getName()
-                + "\', URL= \'" + d.getURL() + "\' WHERE ID= " + d.getId());
 
             String insert =
                     "insert into dbo.hits (word_id, domain_id, context, createdTimeStamp) Values(?,?,?,?)";
