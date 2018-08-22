@@ -32,10 +32,9 @@ public class MiniprojektApplication implements CommandLineRunner {
 
 
         var scr = new WordScraper(dom, "body");
-        String link = scr.returnAllLinksInDomain().get(30);
-        scr.switchDomainAndConnect(new Domain(scr.getUrl() + link,
-                scr.getDomain().getName(),
-                scr.getDomain().getId()));
+        String path = scr.returnAllLinksInDomain().get(30);
+        scr.switchPathAndConnect(path);
+        System.out.println(scr.getUrl());
         scr.returnAllLinksInDomain().forEach(System.out::println);
 
     }
