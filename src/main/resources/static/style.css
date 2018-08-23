@@ -1,5 +1,7 @@
 body{
     background-color: white;
+    font-family: 'Alegreya Sans';
+
 }
 
 html {
@@ -184,8 +186,10 @@ body {
 .chart span {
     margin: 0 1em;
     display: block;
-    background: rgba(209, 236, 250, 0.75);
+    background: #9ae4b0;
     animation: draw 1s ease-in-out;
+    color: #000000;
+    text-align: center;
 }
 .chart span:before {
     position: absolute;
