@@ -8,6 +8,16 @@ html {
     overflow-y: scroll;
 }
 
+h2 {
+    text-decoration: underline;
+}
+/*.h2div{*/
+    /*display: flex;*/
+    /*width: 100%;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+
+/*}*/
 .headline {
     font-family: 'Alegreya Sans';
     font-size: 22px;
