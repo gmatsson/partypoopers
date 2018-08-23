@@ -21,6 +21,7 @@
     <div class="headline">
         <h1>Hur ofta förekommer ett ord i riksdagspartiernas partiprogram?</h1>
         <h3 id="text">Välj ord nedan för att veta!</h3>
+        <h2 th:text="${word}"></h2>
     </div>
 </div>
 
@@ -33,7 +34,6 @@
         </li>
     </ul>
 </div>
-
 
 <div class="scrollmenu">
     <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}"></a>
