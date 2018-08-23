@@ -14,17 +14,9 @@ html {
     text-align: center;
 }
 
-#chartwrap {
-    display: flex;
-    justify-content: right;
-    margin-top: 50px;
-    width: 70%;
-    margin-left: 7%;
-    margin-right: 15%;
-}
 
 #chartdiv {
-    width: 85%;
+    width: 100%;
 }
 
 #chartdrop {
@@ -191,7 +183,7 @@ body {
 .chart {
     display: table;
     table-layout: fixed;
-    width: 100%;
+    width: 70%;
     height: 200px;
     margin: 100px auto;
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0.1) 2%, rgba(0, 0, 0, 0) 2%);
@@ -225,6 +217,28 @@ body {
     text-align: center;
     content: attr(title);
     word-wrap: break-word;
+}
+div.scrollmenu {
+    display: flex;
+    justify-content: center;
+    background-color: #7c7c7c;
+    overflow: auto;
+    white-space: nowrap;
+
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+div.scrollmenu a:active {
+    background-color: #aaaaaa;
+}
+div.scrollmenu a:hover {
+    background-color: #aaaaaa;
 }
 
 @keyframes draw {
