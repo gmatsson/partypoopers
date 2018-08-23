@@ -24,35 +24,19 @@
     </div>
 </div>
 
-
-<div id="chartwrap">
-    <div id="chartdrop" class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="btn-group">
-                    <h2>Välj ord:</h2>
-                    <button type="button" id="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                            th:text="${word}">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu scrollable-menu" role="menu">
-                        <li th:each="word : ${words}"><a th:text="${word.word}" th:href="${'/words/' + word.word}"></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div> v
-    </div>
-    <div id="chartdiv">
-        <ul class="chart">
-            <li th:each="party : ${parties}">
-                <span th:style="${ 'background:' + party.color + '; ' + 'height:' + ((party.count / max)*100) + '%'}" th:title="${party.name}"
+<div id="chartdiv">
+    <ul class="chart">
+        <li th:each="party : ${parties}">
+                <span th:style="${ 'background:' + party.color + '; ' + 'height:' + ((party.count / max)*100) + '%'}"
+                      th:title="${party.name}"
                       th:text="${party.count}"></span>
-            </li>
-        </ul>
-    </div>
+        </li>
+    </ul>
+</div>
 
+
+<div class="scrollmenu">
+    <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}"></a>
 </div>
 
 
