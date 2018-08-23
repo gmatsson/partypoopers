@@ -4,8 +4,17 @@ public class Domain {
     String URL;
     String name;
     String path;
+    String color;
     int id;
 
+
+    public Domain(String URL, String name, String path, String color, int id) {
+        this.URL = URL;
+        this.name = name;
+        this.path = path;
+        this.color = color;
+        this.id = id;
+    }
 
     public Domain(String URL, String name, String path, int id) {
         this.URL = URL;

@@ -47,7 +47,7 @@
     <div id="chartdiv">
         <ul class="chart">
             <li th:each="party : ${parties}">
-                <span th:style="${'height:' + ((party.count / max)*100) + '%'}" th:title="${party.name}"
+                <span th:style="${ 'background:' + party.color + '; ' + 'height:' + ((party.count / max)*100) + '%'}" th:title="${party.name}"
                       th:text="${party.count}"></span>
             </li>
         </ul>

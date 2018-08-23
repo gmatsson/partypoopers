@@ -83,7 +83,7 @@ public class Repository {
             Statement stmt = conn.createStatement();
 
             String query =
-                    "SELECT do.Name, COUNT(*) as count " +
+                    "SELECT do.Name, COUNT(*) as count, do.Color as color " +
                             "FROM dbo.HITS as hi " +
                             "INNER JOIN dbo.SEARCH as se " +
                             " " +
@@ -91,18 +91,22 @@ public class Repository {
                             "INNER JOIN dbo.DOMAIN as do " +
                             "ON hi.Domain_ID = do.ID " +
                             "WHERE Word_ID = ? " +
-                            "GROUP BY do.Name";
+                            "GROUP BY do.Name, do.color";
             var ps = conn.prepareStatement(query);
             ps.setInt(1, id);
             var rs = ps.executeQuery();
 
 
             while (rs.next()) {
-                countNames.add(new CountName(rs.getString("name"), rs.getInt("count")));
+                countNames.add(new CountName(
+                        rs.getString("name"),
+                        rs.getInt("count"),
+                        rs.getString("color")));
             }
             conn.close();
             return countNames;
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Something went wrong when fetching CountNames!");
             return null;
         }
@@ -117,13 +121,14 @@ public class Repository {
             Statement stmt = conn.createStatement();
 
             String query =
-                    "SELECT id, name, url, path from dbo.domain";
+                    "SELECT id, name, url, path, color from dbo.domain";
             var ps = conn.prepareStatement(query);
             var rs = ps.executeQuery();
             while (rs.next()) {
                 domains.add(new Domain(rs.getString("url"),
                         rs.getString("name"),
                         rs.getString("path"),
+                        rs.getString("color"),
                         rs.getInt("id"))
                 );
             }
