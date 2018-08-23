@@ -48,6 +48,14 @@
 </div>
 
 
+
+<ul class="chart">
+    <li th:each="party : ${parties}">
+        <span th:style="${party.count + '%'}" th:title="${party.name}"></span>
+    </li>
+</ul>
+
+
 <!--<header>-->
 <!--<p>-->
 <!--<span th:text="${party.name}" />-->
