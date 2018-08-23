@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 //by Gustaf Matsson
 //2018-08-21
@@ -162,6 +163,40 @@ public class Repository {
             System.err.println("Something went wrong when fetching search!");
             return null;
         }
+    }
+
+    public Hit getRandomContext(){
+
+        var hits = new ArrayList<Hit>();
+
+        try {
+            Connection conn = dataSource.getConnection();
+            Statement stmt = conn.createStatement();
+            Random random = new Random();
+            int contextID = random.nextInt(999);
+
+            String query = "SELECT TOP (1000) * FROM HITS";
+
+            var ps = conn.prepareStatement(query);
+            var rs = ps.executeQuery();
+
+            while (rs.next()) {
+                hits.add(new Hit(
+                        rs.getInt("Word_Id"),
+                        rs.getInt("Domain_ID"),
+                        rs.getString("context")
+                ));
+            }
+
+            conn.close();
+            System.out.println(hits.get(contextID));
+            return hits.get(contextID);
+
+        }catch (Exception e){
+            System.err.println("Something went wrong when fetching context!");
+            return null;
+        }
+
     }
 }
 

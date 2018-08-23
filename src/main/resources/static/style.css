@@ -246,3 +246,9 @@ div.scrollmenu a:hover {
         height: 0;
     }
 }
+
+.quiz{
+    font-family: 'Alegreya Sans';
+    font-size: 22px;
+    text-align: center;
+}

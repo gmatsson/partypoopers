@@ -2,45 +2,35 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>PartyPoopers</title>
+    <title>Title</title>
     <link href='https://fonts.googleapis.com/css?family=Alegreya Sans' rel='stylesheet'>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
-
     <link rel="stylesheet" href="/style.css">
 </head>
-
-
 <body>
+
 <nav id="navbar">
     <a href="/">Hem</a>
-    <a href="/quiz">Quiz</a>
-    <a href="/about">Om oss</a>
+    <a href="/quiz.html">Quiz</a>
+    <a href="/about.html">Om oss</a>
 </nav>
 
 <div class="headline-container">
     <div class="headline">
-        <h1>Hur ofta förekommer ett ord i riksdagspartiernas partiprogram?</h1>
-        <h3 id="text">Sök nedan för att veta!</h3>
+        <h1>Quiz</h1>
     </div>
 </div>
 
-<div id="chartdiv">
-    <ul class="chart">
-        <li th:each="party : ${parties}">
-                <span th:style="${ 'background:' + party.color + '; ' + 'height:' + ((party.count / max)*100) + '%'}"
-                      th:title="${party.name}"
-                      th:text="${party.count}"></span>
-        </li>
-    </ul>
+<div class="quiz">
+    <p th:text="${hit.context}"></p>
 </div>
-
 
 <div class="scrollmenu">
-    <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}"></a>
+    <a th:each="party : ${parties}" th:text="${party.name}"></a>
 </div>
-
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 </body>
+
 </html>
