@@ -5,6 +5,7 @@
     <title>PartyPoopers</title>
     <link href='https://fonts.googleapis.com/css?family=Alegreya Sans' rel='stylesheet'>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styleResult.css">
 </head>
 
 
@@ -22,14 +23,7 @@
 </div>
 </div>
 
-<div th:each="party : ${parties}">
-    <header>
-        <p>
-            <span th:text="${party.name}" />
-            <span th:text="${party.count}" />
-        </p>
-    </header>
-</div>
+
 
 
 <div class="search-container" >
@@ -43,7 +37,27 @@
 </div>
 
 
+<div th:each="party : ${parties}">
+<table>
+    <tr>
+        <th>Parti:</th>
+        <th>Antal:</th>
+    </tr>
+    <tr>
+        <th th:text="${party.name}"></th>
+        <th th:text="${party.count}"></th>
+    </tr>
+</table>
+</div>
 
+
+    <!--<header>-->
+        <!--<p>-->
+            <!--<span th:text="${party.name}" />-->
+            <!--<span th:text="${party.count}" />-->
+        <!--</p>-->
+    <!--</header>-->
+<!--</div>-->
 <!--<p th:text="${countName.name}"></p>-->
 
 <!--<div class="search-container">-->
