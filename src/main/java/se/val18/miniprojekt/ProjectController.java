@@ -44,9 +44,4 @@ public class ProjectController {
         return new ModelAndView("index").addObject("parties", parties).addObject("words", words );
     }
 
-    @PostMapping("/word")
-    public ModelAndView words(@RequestParam String text){
-        System.out.println("words");
-        return new ModelAndView("index");
-    }
 }
