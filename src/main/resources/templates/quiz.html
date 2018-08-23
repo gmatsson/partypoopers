@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href='https://fonts.googleapis.com/css?family=Alegreya Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav id="navbar">
+    <a href="/">Hem</a>
+    <a href="/quiz.html">Quiz</a>
+    <a href="/about.html">Om oss</a>
+</nav>
+
+<div class="headline-container">
+    <div class="headline">
+        <h1>Quiz</h1>
+        <h3 id="text">Koppla textstycket till rätt parti!</h3>
+    </div>
+</div>
+
+
+
+<div class="quiz">
+    <p th:text="${'&quot;' + hit.context + '&quot;'}"></p>
+</div>
+
+<div class="answer">
+    <a th:each="party : ${parties}" th:text="${party.name}"></a>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+</body>
+
+</html>

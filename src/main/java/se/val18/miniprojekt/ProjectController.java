@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import se.val18.miniprojekt.repo.CountName;
-import se.val18.miniprojekt.repo.Repository;
-import se.val18.miniprojekt.repo.Search;
+import se.val18.miniprojekt.repo.*;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class ProjectController {
@@ -51,5 +50,13 @@ public class ProjectController {
                 .addObject("words", words )
                 .addObject("max", max);
     }
+
+    @GetMapping("/quiz")
+    public ModelAndView quiz(){
+        Hit hits = repo.getRandomContext();
+        List<Domain> parties = repo.getAllDomains();
+        return new ModelAndView("quiz").addObject("hit", hits).addObject("parties", parties);
+    }
+    
 
 }
