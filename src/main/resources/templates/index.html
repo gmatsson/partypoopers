@@ -25,12 +25,14 @@
 
 <div class="search-container">
     <div class="dropdown">
-        <button class="dropbtn">Välj ett ord!</button>
+        <button class="dropbtn" th:text="${word}">Välj ett ord!</button>
         <div class="dropdown-content">
             <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}"></a>
         </div>
     </div>
 </div>
+
+<p ></p>
 
 <div class="result-container">
     <div>
