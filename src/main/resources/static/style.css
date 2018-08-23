@@ -172,7 +172,7 @@ body {
     width: 60%;
     max-width: 700px;
     height: 200px;
-    margin: 0 auto;
+    margin: 100px auto;
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0.1) 2%, rgba(0, 0, 0, 0) 2%);
     background-size: 100% 50px;
     background-position: left top;
