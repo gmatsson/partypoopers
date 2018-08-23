@@ -22,7 +22,7 @@ public class ProjectController {
     private Repository repo;
 
     @GetMapping("/")
-    public ModelAndView index(@RequestParam (required = false) List<CountName> parties){
+    public String index(@RequestParam (required = false) List<CountName> parties){
         List <Search> words = repo.getAllSearch();
         System.out.println("index");
         try{
@@ -30,9 +30,7 @@ public class ProjectController {
         }catch (Exception e){
 
         }
-        return new ModelAndView("index")
-                .addObject("words", words )
-                .addObject("parties", parties);
+        return "redirect:/words/Sverige";
     }
 
     @GetMapping("/words/{word}")
