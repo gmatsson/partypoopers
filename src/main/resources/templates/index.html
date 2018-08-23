@@ -32,72 +32,14 @@
     </div>
 </div>
 
-<p ></p>
-
-<div class="result-container">
-    <div>
-        <table>
-            <th>Parti:</th>
-            <th>Antal:</th>
-            <tr th:each="party : ${parties}">
-                <td th:text="${party.name}"></td>
-                <td th:text="${party.count}"></td>
-            </tr>
-        </table>
-    </div>
-</div>
-
 
 
 <ul class="chart">
     <li th:each="party : ${parties}">
-        <span th:style="${'height:' + ((party.count / max)*100) + '%'}" th:title="${party.name}"></span>
+        <span th:style="${'height:' + ((party.count / max)*100) + '%'}" th:title="${party.name}" th:text="${party.count}"></span>
     </li>
 </ul>
 
-
-<!--<header>-->
-<!--<p>-->
-<!--<span th:text="${party.name}" />-->
-<!--<span th:text="${party.count}" />-->
-<!--</p>-->
-<!--</header>-->
-<!--</div>-->
-<!--<p th:text="${countName.name}"></p>-->
-
-<!--<div class="search-container">-->
-<!--<form autocomplete="off" action="/action_page.php">-->
-<!--<div class="autocomplete" style="width:300px;">-->
-<!--<input id="myInput" type="text" name="myCountry" placeholder="Skriv ord">-->
-<!--</div>-->
-<!--<input type="submit">-->
-<!--</form>-->
-<!--</div>-->
-
-<!--<canvas id="barChart"></canvas>-->
-
-
-<!--<div class="search-container">-->
-<!--<div>-->
-<!--<form action="/index" method="post">-->
-<!--<input type="search" placeholder="Sök ord">-->
-<!--<input id="button" type="submit" value="Sök">-->
-<!--</form>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="table-container" th:each="countName : ${countNames}">-->
-<!--<table>-->
-<!--<tr>-->
-<!--<th>Parti</th>-->
-<!--<th>Antal</th>-->
-<!--</tr>-->
-<!--<tr  th:each="countName : ${countNames}">-->
-<!--<td th:text="${countName.name}">Partier</td>-->
-<!--<td th:text="${countName.name}">Antal förekomster av ord</td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--</div>-->
 
 
 </body>
