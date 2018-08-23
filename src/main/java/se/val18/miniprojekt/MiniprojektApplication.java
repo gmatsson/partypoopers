@@ -26,15 +26,10 @@ public class MiniprojektApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        Domain dom = repo.getAllDomains().get(0);
-        Search search = repo.getAllSearch().get(0);
+
 
         //love_gustaf/writeDB
-        var scr = new WordScraper(dom, "body");
-        String path = scr.returnAllLinksInDomain().get(30);
-        scr.switchPathAndConnect(path);
-        System.out.println(scr.getUrl());
-        scr.returnAllLinksInDomain().forEach(System.out::println);
+
 
     }
 }

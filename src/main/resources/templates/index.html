@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>PartyPoopers</title>
     <link href='https://fonts.googleapis.com/css?family=Alegreya Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/styleResult.css">
 </head>
 
 
@@ -17,84 +18,29 @@
 </nav>
 
 <div class="headline-container">
-<div class="headline">
-    <h1>Hur ofta förekommer ett ord i riksdagspartiernas partiprogram?</h1>
-    <h3 id="text">Sök nedan för att veta!</h3>
-</div>
-</div>
-
-
-
-
-<div class="search-container" >
-<div class="dropdown">
-    <button class="dropbtn">Välj ett ord!</button>
-    <div class="dropdown-content">
-        <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}">Link 2</a>
-
+    <div class="headline">
+        <h1>Hur ofta förekommer ett ord i riksdagspartiernas partiprogram?</h1>
+        <h3 id="text">Sök nedan för att veta!</h3>
     </div>
 </div>
+
+<div id="chartdiv">
+    <ul class="chart">
+        <li th:each="party : ${parties}">
+                <span th:style="${ 'background:' + party.color + '; ' + 'height:' + ((party.count / max)*100) + '%'}"
+                      th:title="${party.name}"
+                      th:text="${party.count}"></span>
+        </li>
+    </ul>
 </div>
 
 
-<div th:each="party : ${parties}">
-<table>
-    <tr>
-        <th>Parti:</th>
-        <th>Antal:</th>
-    </tr>
-    <tr>
-        <th th:text="${party.name}"></th>
-        <th th:text="${party.count}"></th>
-    </tr>
-</table>
+<div class="scrollmenu">
+    <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}"></a>
 </div>
 
 
-    <!--<header>-->
-        <!--<p>-->
-            <!--<span th:text="${party.name}" />-->
-            <!--<span th:text="${party.count}" />-->
-        <!--</p>-->
-    <!--</header>-->
-<!--</div>-->
-<!--<p th:text="${countName.name}"></p>-->
-
-<!--<div class="search-container">-->
-<!--<form autocomplete="off" action="/action_page.php">-->
-    <!--<div class="autocomplete" style="width:300px;">-->
-        <!--<input id="myInput" type="text" name="myCountry" placeholder="Skriv ord">-->
-    <!--</div>-->
-    <!--<input type="submit">-->
-<!--</form>-->
-<!--</div>-->
-
-<!--<canvas id="barChart"></canvas>-->
-
-
-<!--<div class="search-container">-->
-<!--<div>-->
-    <!--<form action="/index" method="post">-->
-    <!--<input type="search" placeholder="Sök ord">-->
-    <!--<input id="button" type="submit" value="Sök">-->
-    <!--</form>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="table-container" th:each="countName : ${countNames}">-->
-<!--<table>-->
-    <!--<tr>-->
-        <!--<th>Parti</th>-->
-        <!--<th>Antal</th>-->
-    <!--</tr>-->
-    <!--<tr  th:each="countName : ${countNames}">-->
-        <!--<td th:text="${countName.name}">Partier</td>-->
-        <!--<td th:text="${countName.name}">Antal förekomster av ord</td>-->
-    <!--</tr>-->
-<!--</table>-->
-<!--</div>-->
-
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

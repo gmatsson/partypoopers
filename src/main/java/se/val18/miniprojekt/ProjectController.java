@@ -36,17 +36,22 @@ public class ProjectController {
     }
 
     @GetMapping("/words/{word}")
-    public ModelAndView result(@PathVariable String word){ 
+    public ModelAndView result(@PathVariable String word){
         List<CountName> parties = repo.getCountAndNameForId(repo.getWordIdForString(word));
         List <Search> words = repo.getAllSearch();
         System.out.println("result");
         System.out.println(parties);
-        return new ModelAndView("index").addObject("parties", parties).addObject("words", words );
+
+        double max = 0;
+
+        for (var p : parties) {
+            max = Math.max(p.getCount(), max);
+        }
+
+        return new ModelAndView("index")
+                .addObject("parties", parties)
+                .addObject("words", words )
+                .addObject("max", max);
     }
 
-    @PostMapping("/word")
-    public ModelAndView words(@RequestParam String text){
-        System.out.println("words");
-        return new ModelAndView("index");
-    }
 }

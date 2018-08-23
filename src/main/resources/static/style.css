@@ -1,33 +1,55 @@
-body{
+body {
     background-color: white;
+    font-family: 'Alegreya Sans';
+
 }
 
-.headline{
+html {
+    overflow-y: scroll;
+}
+
+.headline {
     font-family: 'Alegreya Sans';
     font-size: 22px;
     text-align: center;
 }
 
-.headline-container{
-    display: flex;
-    justify-content: center;
+
+#chartdiv {
     width: 100%;
-    margin-top: 200px;
 }
 
-#text{
+#chartdrop {
+    width: 15%;
+}
+
+.headline-container {
+    display: inline-grid;
+    justify-content: center;
+    width: 100%;
+    margin-top: 130px;
+}
+
+#text {
     font-family: "Alegreya Sans";
     text-align: center;
 }
 
-.search-container{
+.search-container {
     margin-top: 50px;
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-input[type=search]{
+.result-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+input[type=search] {
     padding: 12px 20px;
     margin: 8px 0;
     border-radius: 2.5px;
@@ -35,7 +57,7 @@ input[type=search]{
     font-size: 16px;
 }
 
-#navbar{
+#navbar {
     overflow: hidden;
     background-color: transparent;
     padding: auto;
@@ -45,7 +67,7 @@ input[type=search]{
     width: 100%;
 }
 
-#navbar a{
+#navbar a {
     color: black;
     font-family: 'Alegreya Sans';
     font-size: 20px;
@@ -55,26 +77,21 @@ input[type=search]{
     transition: all 0.3s ease;
 }
 
-#navbar a:visited{
+#navbar a:visited {
     color: black;
 }
 
-#navbar a:hover{
+#navbar a:hover {
     color: gray;
 }
 
-#button{
-    padding: 12px;
-    border-radius: 2.5px;
-    font-family: "Alegreya Sans";
+#button {
+    width: 160px;
+    border-radius: 4px;
 }
 
-#button:hover{
-    background-color: gray;
-    cursor: pointer;
-}
 
-.table-container{
+.table-container {
     margin-top: 50px;
     display: flex;
     justify-content: center;
@@ -96,62 +113,6 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
-}
-
-
-/*SEARCHBAR*/
-
-* { box-sizing:
-        border-box;
-}
-
-body {
-    font: 16px Arial;
-}
-.autocomplete {
-    /*the container must be positioned relative:*/
-    position: relative;
-    display: inline-block;
-}
-input {
-    border: 1px solid transparent;
-    background-color: #f1f1f1;
-    padding: 10px;
-    font-size: 16px;
-}
-input[type=text] {
-    background-color: #f1f1f1;
-    width: 100%;
-}
-input[type=submit] {
-    background-color: purple;
-    color: #fff;
-}
-.autocomplete-items {
-    position: absolute;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
-    left: 0;
-    right: 0;
-}
-.autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
-}
-.autocomplete-items div:hover {
-    /*when hovering an item:*/
-    background-color: #e9e9e9;
-}
-.autocomplete-active {
-    /*when navigating through the items using the arrow keys:*/
-    background-color: DodgerBlue !important;
-    color: #ffffff;
 }
 
 /* Dropdown Button */
@@ -202,4 +163,86 @@ input[type=submit] {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     background-color: #e2d269;
+}
+
+body {
+    font: 13px/1.3 'Lucida Grande', sans-serif;
+    color: #666;
+}
+
+.dropdown-menu {
+    width: 100%;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.chart {
+    display: table;
+    table-layout: fixed;
+    width: 70%;
+    height: 200px;
+    margin: 100px auto;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.1) 2%, rgba(0, 0, 0, 0) 2%);
+    background-size: 100% 50px;
+    background-position: left top;
+}
+
+.chart li {
+    position: relative;
+    display: table-cell;
+    vertical-align: bottom;
+    height: 200px;
+}
+
+.chart span {
+    margin: 0 1em;
+    display: block;
+    background: #9ae4b0;
+    animation: draw 1s ease-in-out;
+    color: #000000;
+    text-align: center;
+}
+
+.chart span:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    padding: 5px 1em 0;
+    display: block;
+    text-align: center;
+    content: attr(title);
+    word-wrap: break-word;
+}
+div.scrollmenu {
+    display: flex;
+    justify-content: center;
+    background-color: #7c7c7c;
+    overflow: auto;
+    white-space: nowrap;
+
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+div.scrollmenu a:active {
+    background-color: #aaaaaa;
+}
+div.scrollmenu a:hover {
+    background-color: #aaaaaa;
+}
+
+@keyframes draw {
+    0% {
+        height: 0;
+    }
 }
