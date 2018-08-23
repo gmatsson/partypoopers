@@ -59,5 +59,6 @@ public class ProjectController {
         List<Domain> parties = repo.getAllDomains();
         return new ModelAndView("quiz").addObject("hit", hits).addObject("parties", parties);
     }
+    
 
 }

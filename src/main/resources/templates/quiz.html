@@ -18,14 +18,17 @@
 <div class="headline-container">
     <div class="headline">
         <h1>Quiz</h1>
+        <h3 id="text">Koppla textstycket till rätt parti!</h3>
     </div>
 </div>
 
+
+
 <div class="quiz">
-    <p th:text="${hit.context}"></p>
+    <p th:text="${'&quot;' + hit.context + '&quot;'}"></p>
 </div>
 
-<div class="scrollmenu">
+<div class="answer">
     <a th:each="party : ${parties}" th:text="${party.name}"></a>
 </div>
 

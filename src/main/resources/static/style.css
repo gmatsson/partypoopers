@@ -248,7 +248,34 @@ div.scrollmenu a:hover {
 }
 
 .quiz{
-    font-family: 'Alegreya Sans';
-    font-size: 22px;
+    color: #990000;
+    margin-top: 100px;
+    font-family: 'Alegreya Sans', cursive;
+    font-size: 35px;
     text-align: center;
+}
+
+.answer{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    background-color: #7c7c7c;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.answer a{
+    display: inline-block;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-right: 30px;
+    padding-left: 30px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.answer a:hover {
+    background-color: #aaaaaa;
 }
