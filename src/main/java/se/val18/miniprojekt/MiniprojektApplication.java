@@ -29,7 +29,7 @@ public class MiniprojektApplication implements CommandLineRunner {
         Domain dom = repo.getAllDomains().get(0);
         Search search = repo.getAllSearch().get(0);
 
-        love_gustaf/writeDB
+        //love_gustaf/writeDB
         var scr = new WordScraper(dom, "body");
         String path = scr.returnAllLinksInDomain().get(30);
         scr.switchPathAndConnect(path);

@@ -5,10 +5,7 @@ import org.springframework.stereotype.Component;
 import se.val18.miniprojekt.repo.Domain;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +99,6 @@ public class Repository {
     }
 
 
-
     @SuppressWarnings("Duplicates")
     public List<Domain> getAllDomains() {
         var domains = new ArrayList<Domain>();
@@ -144,7 +140,7 @@ public class Repository {
             }
             return searches;
         } catch (SQLException e) {
-            System.err.println("Something went wrong when fetching domains!");
+            System.err.println("Something went wrong when fetching search!");
             return null;
         }
     }
