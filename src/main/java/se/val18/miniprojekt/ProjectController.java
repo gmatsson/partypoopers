@@ -36,7 +36,7 @@ public class ProjectController {
     }
 
     @GetMapping("/words/{word}")
-    public ModelAndView result(@PathVariable String word){ 
+    public ModelAndView result(@PathVariable String word){
         List<CountName> parties = repo.getCountAndNameForId(repo.getWordIdForString(word));
         List <Search> words = repo.getAllSearch();
         System.out.println("result");
