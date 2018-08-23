@@ -52,9 +52,16 @@ public class Repository {
             var ps = conn.prepareStatement(query);
             ps.setString(1, word);
             var rs = ps.executeQuery();
+
+            int returnValue = 0;
+
             if (rs.next()) {
-                return rs.getInt("id");
-            } else return -1;
+                returnValue = rs.getInt("id");
+            } else returnValue = -1;
+
+            conn.close();
+
+            return returnValue;
 
         } catch (SQLException e) {
             try {
@@ -88,9 +95,12 @@ public class Repository {
             var ps = conn.prepareStatement(query);
             ps.setInt(1, id);
             var rs = ps.executeQuery();
+
+
             while (rs.next()) {
                 countNames.add(new CountName(rs.getString("name"), rs.getInt("count")));
             }
+            conn.close();
             return countNames;
         } catch (SQLException e) {
             System.err.println("Something went wrong when fetching CountNames!");
@@ -133,11 +143,15 @@ public class Repository {
                     "SELECT id, word from dbo.search";
             var ps = conn.prepareStatement(query);
             var rs = ps.executeQuery();
+
+
             while (rs.next()) {
                 searches.add(new Search(rs.getInt("id"),
                         rs.getString("word")
                 ));
             }
+
+            conn.close();
             return searches;
         } catch (SQLException e) {
             System.err.println("Something went wrong when fetching search!");

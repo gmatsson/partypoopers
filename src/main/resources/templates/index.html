@@ -23,26 +23,23 @@
 </div>
 
 
-<div class="search-container" >
+<div class="search-container">
     <div class="dropdown">
         <button class="dropbtn">Välj ett ord!</button>
         <div class="dropdown-content">
-            <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}">Link 2</a>
-
+            <a th:each="word : ${words}" th:text="${word.word}" th:href="${'/words/' + word.word}"></a>
         </div>
     </div>
 </div>
 
-<div class="result-container" th:each="party : ${parties}">
+<div class="result-container">
     <div>
         <table>
-            <tr>
-                <th>Parti:</th>
-                <th>Antal:</th>
-            </tr>
-            <tr>
-                <th th:text="${party.name}"></th>
-                <th th:text="${party.count}"></th>
+            <th>Parti:</th>
+            <th>Antal:</th>
+            <tr th:each="party : ${parties}">
+                <td th:text="${party.name}"></td>
+                <td th:text="${party.count}"></td>
             </tr>
         </table>
     </div>
