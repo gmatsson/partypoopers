@@ -44,8 +44,7 @@ public class Repository {
     }
 
     public int getWordIdForString(String word) {
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()){
             Statement stmt = conn.createStatement();
 
             String query =
@@ -59,8 +58,6 @@ public class Repository {
             if (rs.next()) {
                 returnValue = rs.getInt("id");
             } else returnValue = -1;
-
-            conn.close();
 
             return returnValue;
 
@@ -79,8 +76,7 @@ public class Repository {
     @SuppressWarnings("Duplicates")
     public List<CountName> getCountAndNameForId(int id) {
         var countNames = new ArrayList<CountName>();
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()) {
             Statement stmt = conn.createStatement();
 
             String query =
@@ -104,7 +100,6 @@ public class Repository {
                         rs.getInt("count"),
                         rs.getString("color")));
             }
-            conn.close();
             return countNames;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,8 +112,7 @@ public class Repository {
     @SuppressWarnings("Duplicates")
     public List<Domain> getAllDomains() {
         var domains = new ArrayList<Domain>();
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()){
             Statement stmt = conn.createStatement();
 
             String query =
@@ -142,8 +136,7 @@ public class Repository {
 
     public List<Search> getAllSearch() {
         var searches = new ArrayList<Search>();
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()){
             Statement stmt = conn.createStatement();
 
             String query =
@@ -191,8 +184,6 @@ public class Repository {
                 ));
             }
 
-            //conn.close();
-//            return rs.getString("context");
             String context = hits.get(0).context;
             return context;
 
@@ -224,8 +215,6 @@ public class Repository {
                         rs.getString("context")
                 ));
             }
-
-//            conn.close();
 
             return hits.get(1).id;
 
@@ -259,7 +248,6 @@ public class Repository {
                 ));
             }
 
-//            conn.close();
 
             return hits.get(1).id;
 
