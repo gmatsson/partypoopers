@@ -57,6 +57,18 @@ public class ProjectController {
         List<Domain> parties = repo.getAllDomains();
         return new ModelAndView("quiz").addObject("hit", hits).addObject("parties", parties);
     }
-    
+
+    @GetMapping("/answer/{domainID}/{questID}")
+    public ModelAndView answer(@PathVariable int domainID, @PathVariable int questID){
+        List<Domain> domains = repo.getAllDomains();
+        String parti = "";
+        for (Domain d: domains) {
+            if(d.getId()== domainID)
+                parti = d.getName();
+        }
+
+        return new ModelAndView("quiz").addObject("hit", repo.getRandomContext()).addObject("parties", domains).addObject("parti", parti);
+    }
+
 
 }
