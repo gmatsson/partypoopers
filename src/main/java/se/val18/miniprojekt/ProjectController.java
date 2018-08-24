@@ -58,7 +58,7 @@ public class ProjectController {
         return new ModelAndView("quiz").addObject("hit", hits).addObject("parties", domains).addObject("parti");
     }
 
-    @GetMapping("/quiz/answer/{domainID}/{questID}")
+    @GetMapping("/answer/{domainID}/{questID}")
     public ModelAndView answer(@PathVariable int domainID, @PathVariable int questID){
         List<Domain> domains = repo.getAllDomains();
         String parti = "";
