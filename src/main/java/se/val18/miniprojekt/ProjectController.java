@@ -53,12 +53,12 @@ public class ProjectController {
 
     @GetMapping("/quiz")
     public ModelAndView quiz(){
-        String hits = repo.getRandomContext();
-        List<Domain> parties = repo.getAllDomains();
-        return new ModelAndView("quiz").addObject("hit", hits).addObject("parties", parties);
+        Hit hits = repo.getRandomContext();
+        List<Domain> domains = repo.getAllDomains();
+        return new ModelAndView("quiz").addObject("hit", hits).addObject("parties", domains).addObject("parti");
     }
 
-    @GetMapping("/answer/{domainID}/{questID}")
+    @GetMapping("/quiz/answer/{domainID}/{questID}")
     public ModelAndView answer(@PathVariable int domainID, @PathVariable int questID){
         List<Domain> domains = repo.getAllDomains();
         String parti = "";
@@ -66,7 +66,11 @@ public class ProjectController {
             if(d.getId()== domainID)
                 parti = d.getName();
         }
-
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new ModelAndView("quiz").addObject("hit", repo.getRandomContext()).addObject("parties", domains).addObject("parti", parti);
     }
 

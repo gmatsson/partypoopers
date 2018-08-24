@@ -8,6 +8,9 @@ html {
     overflow-y: scroll;
 }
 
+h2 {
+    text-decoration: underline;
+}
 /*.h2div{*/
     /*display: flex;*/
     /*width: 100%;*/
@@ -285,6 +288,12 @@ div.scrollmenu a:hover {
 
 .answer a:hover {
     background-color: #aaaaaa;
+}
+
+#correctAnswer {
+    display: none;
+    width: 100%;
+    justify-content: center;
 }
 
 #jennie{

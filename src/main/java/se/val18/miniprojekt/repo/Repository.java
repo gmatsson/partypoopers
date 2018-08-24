@@ -159,7 +159,7 @@ public class Repository {
         }
     }
 
-    public String getRandomContext() {
+    public Hit getRandomContext() {
 
         var hits = new ArrayList<Hit>();
 
@@ -184,8 +184,7 @@ public class Repository {
                 ));
             }
 
-            String context = hits.get(0).context;
-            return context;
+            return hits.get(0);
 
         } catch (Exception e) {
             System.err.println("From method \"getRandomContext()\": Something went wrong when fetching context!");
