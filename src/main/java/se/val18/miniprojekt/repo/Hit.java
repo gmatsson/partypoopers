@@ -10,11 +10,18 @@ public class Hit {
     LocalDateTime createTime;
 
     public Hit(int wordId, int domainId, String context) {
+        this.wordId = wordId;
+        this.domainId = domainId;
+        this.context = context;
+    }
+
+    public Hit(int id, int wordId, int domainId, String context) {
         this.id = id;
         this.wordId = wordId;
         this.domainId = domainId;
         this.context = context;
     }
+
 
     public int getId() {
         return id;

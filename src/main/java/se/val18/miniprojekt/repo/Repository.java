@@ -44,8 +44,7 @@ public class Repository {
     }
 
     public int getWordIdForString(String word) {
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()){
             Statement stmt = conn.createStatement();
 
             String query =
@@ -59,8 +58,6 @@ public class Repository {
             if (rs.next()) {
                 returnValue = rs.getInt("id");
             } else returnValue = -1;
-
-            conn.close();
 
             return returnValue;
 
@@ -79,8 +76,7 @@ public class Repository {
     @SuppressWarnings("Duplicates")
     public List<CountName> getCountAndNameForId(int id) {
         var countNames = new ArrayList<CountName>();
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()) {
             Statement stmt = conn.createStatement();
 
             String query =
@@ -104,7 +100,6 @@ public class Repository {
                         rs.getInt("count"),
                         rs.getString("color")));
             }
-            conn.close();
             return countNames;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,8 +112,7 @@ public class Repository {
     @SuppressWarnings("Duplicates")
     public List<Domain> getAllDomains() {
         var domains = new ArrayList<Domain>();
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()){
             Statement stmt = conn.createStatement();
 
             String query =
@@ -139,10 +133,10 @@ public class Repository {
             return null;
         }
     }
+
     public List<Search> getAllSearch() {
         var searches = new ArrayList<Search>();
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()){
             Statement stmt = conn.createStatement();
 
             String query =
@@ -165,38 +159,103 @@ public class Repository {
         }
     }
 
-    public Hit getRandomContext(){
+    public String getRandomContext() {
 
         var hits = new ArrayList<Hit>();
 
-        try {
-            Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection()){
+
             Statement stmt = conn.createStatement();
             Random random = new Random();
-            int contextID = random.nextInt(999);
+            int contextID = random.nextInt(lastIdInHitsList() - firstIdInHitsList()) + firstIdInHitsList();
 
-            String query = "SELECT TOP (1000) * FROM HITS";
+            String query = "SELECT * FROM HITS WHERE ID = ?";
+
+            var ps = conn.prepareStatement(query);
+            ps.setInt(1, contextID);
+            var rs = ps.executeQuery();
+
+            while (rs.next()) {
+                hits.add(new Hit(
+                        rs.getInt("ID"),
+                        rs.getInt("Word_ID"),
+                        rs.getInt("Domain_ID"),
+                        rs.getString("context")
+                ));
+            }
+
+            String context = hits.get(0).context;
+            return context;
+
+        } catch (Exception e) {
+            System.err.println("From method \"getRandomContext()\": Something went wrong when fetching context!");
+            return null;
+        }
+
+    }
+
+    public int firstIdInHitsList() {
+
+        var hits = new ArrayList<Hit>();
+
+        try (Connection conn = dataSource.getConnection()){
+
+            Statement stmt = conn.createStatement();
+
+            String query = "SELECT * FROM HITS order by ID asc";
 
             var ps = conn.prepareStatement(query);
             var rs = ps.executeQuery();
 
             while (rs.next()) {
                 hits.add(new Hit(
+                        rs.getInt("ID"),
                         rs.getInt("Word_Id"),
                         rs.getInt("Domain_ID"),
                         rs.getString("context")
                 ));
             }
 
-            conn.close();
-            System.out.println(hits.get(contextID));
-            return hits.get(contextID);
+            return hits.get(1).id;
 
-        }catch (Exception e){
-            System.err.println("Something went wrong when fetching context!");
-            return null;
+
+        } catch (Exception e) {
+            System.err.println("From method \"firstIdInHitsList()\": Something went wrong when fetching first hits id!");
         }
 
+        return 0;
     }
+
+    public int lastIdInHitsList() {
+
+        var hits = new ArrayList<Hit>();
+
+        try (Connection conn = dataSource.getConnection()){
+
+            Statement stmt = conn.createStatement();
+
+            String query = "SELECT * FROM HITS order by ID desc";
+
+            var ps = conn.prepareStatement(query);
+            var rs = ps.executeQuery();
+
+            while (rs.next()) {
+                hits.add(new Hit(
+                        rs.getInt("ID"),
+                        rs.getInt("Word_Id"),
+                        rs.getInt("Domain_ID"),
+                        rs.getString("context")
+                ));
+            }
+
+
+            return hits.get(1).id;
+
+        } catch (Exception e) {
+            System.err.println("From method \"lastIdInHitsList()\": Something went wrong when fetching last hits id!");
+        }
+        return 0;
+    }
+
 }
 

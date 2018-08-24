@@ -53,7 +53,7 @@ public class ProjectController {
 
     @GetMapping("/quiz")
     public ModelAndView quiz(){
-        Hit hits = repo.getRandomContext();
+        String hits = repo.getRandomContext();
         List<Domain> parties = repo.getAllDomains();
         return new ModelAndView("quiz").addObject("hit", hits).addObject("parties", parties);
     }
