@@ -289,3 +289,9 @@ div.scrollmenu a:hover {
 .answer a:hover {
     background-color: #aaaaaa;
 }
+
+#correctAnswer {
+    display: none;
+    width: 100%;
+    justify-content: center;
+}
