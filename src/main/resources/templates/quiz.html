@@ -27,9 +27,10 @@
 <div class="quiz">
     <p th:text="${'&quot;' + hit + '&quot;'}"></p>
 </div>
+<h2 th:text="${parti}"></h2>
 
 <div class="answer">
-    <a th:each="party : ${parties}" th:text="${party.name}"></a>
+    <a th:each="party : ${parties}" th:text="${party.name}" th:href="'/answer/' + ${hit.domainId} + '/' + ${party.id}"></a>
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
