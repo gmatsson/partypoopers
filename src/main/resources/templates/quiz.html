@@ -25,13 +25,14 @@
 <div class="quiz">
     <p th:text="${'&quot;' + hit + '&quot;'}"></p>
 </div>
+<h2 th:text="${parti}"></h2>
 
 <div id="correctAnswer">
     <h2>Korrekt svar:</h2>
 </div>
 
 <div class="answer">
-    <a th:each="party : ${parties}" th:text="${party.name}" onclick="correctAnswer()"></a>
+    <a th:each="party : ${parties}" th:text="${party.name}" th:href="'/answer/' + ${hit.domainId} + '/' + ${party.id}"></a>
 </div>
 
 <script src="/script.js"></script>
