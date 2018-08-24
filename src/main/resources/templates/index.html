@@ -30,7 +30,7 @@
         <li th:each="party : ${parties}">
                 <span th:style="${ 'background:' + party.color + '; ' + 'height:' + ((party.count / max)*100) + '%'}"
                       th:title="${party.name}"
-                      th:text="${party.count}"></span>
+                      ><p id="jennie" th:text="${party.count}"></p></span>
         </li>
     </ul>
 </div>
